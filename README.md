@@ -184,7 +184,7 @@ precedência sobre a soma, então a expressão é `7 + (2 * 3) = 13`, e 13 em bi
 
 ## Vídeo de apresentação
 
-LINK_DO_VIDEO
+[LINK_DO_VIDEO](https://youtu.be/RKUg8XksSgI)
 
 ## Referências
 
