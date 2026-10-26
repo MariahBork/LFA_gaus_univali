@@ -1,0 +1,45 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+Package = gals
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = Stream
+Parser = SLR
+#RegularDefinitions
+
+#Tokens
+ :[\ \n\t\r\s]+
+numeros: [0-1]+
+variaveis: [A-Za-z]|[A-Za-z][A-Za-z0-9]+
+logaritmo = variaveis : "log"
+show = variaveis : "Show"
+soma: \+
+subtracao: \-
+multiplicacao: \*
+divisao: /
+exponenciacao: \^
+atribuicao: =
+delimitador: ;
+associacao_aberta: \(
+associacao_fechada: \)
+#NonTerminals
+<lista_comandos>
+<comando>
+<calculo4>
+<calculo3>
+<calculo2>
+<calculo1>
+<valor>
+#Grammar
+<lista_comandos> ::= <comando> <lista_comandos> | <comando>;
+<comando> ::= variaveis #1 atribuicao <calculo4> delimitador #2 | show associacao_aberta <calculo4> associacao_fechada delimitador #3;
+<calculo4> ::= <calculo4> soma <calculo3> #4 | <calculo4> subtracao <calculo3> #5 | <calculo3>;
+<calculo3> ::= <calculo3> multiplicacao <calculo2> #6 | <calculo3> divisao <calculo2> #7 | <calculo2>;
+<calculo2> ::= <calculo1> exponenciacao <calculo2> #8 | <calculo1>;
+<calculo1> ::= logaritmo <valor> #9 | <valor>;
+<valor> ::= associacao_aberta <calculo4> associacao_fechada | numeros #10 | variaveis #11;
